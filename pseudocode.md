@@ -31,4 +31,5 @@
   + History? (show previously made guesses + results)
   + Make the gameplay and interface prettier!
   + Two player mode?
+  + Guess limits for varying difficulties?
   + ???????
