@@ -34,4 +34,12 @@ describe 'Game' do
 
   describe '#answer' do
   end
+
+  describe '#in_common' do
+    it 'returns the number split_guesscode and split_mastercode share' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+
+      master_code.answer
+  end
 end
