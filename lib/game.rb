@@ -11,8 +11,8 @@ attr_reader :code,
     @guess = ""
   end
 
-  def store_guesses(guess)
-    @guesses << guess
+  def store_guesses
+    @guesses << @guess
   end
 
   def guesser
@@ -38,9 +38,15 @@ attr_reader :code,
         p "Too long!"
       else
         in_common
-        # equalizer
-        # checker
-        # store_guesses(guess)
+        checker
+        store_guesses
+        if store_guesses.count == 1
+          puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
+  You've taken #{store_guesses.count} guess"
+        else
+          puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
+  You've taken #{store_guesses.count} guesses"
+        end
       end
   end
 
@@ -53,6 +59,7 @@ attr_reader :code,
         shared += 1
       end
     end
+    return shared
   end
 
   def in_common
