@@ -19,7 +19,7 @@ describe 'Game' do
   end
 
   describe '#store_guesses' do
-    it 'stores guesses' do
+    xit 'stores guesses' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       master_code.store_guesses("guess1")
@@ -29,17 +29,58 @@ describe 'Game' do
     end
   end
 
-  describe '#guesser' do
+  describe '#checker' do
+
   end
 
   describe '#answer' do
+
   end
 
   describe '#in_common' do
-    it 'returns the number split_guesscode and split_mastercode share' do
+    it 'returns 0 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
-
+      allow(master_code).to receive(:gets).and_return("gggg")
       master_code.answer
+
+      expect(master_code.in_common).to eq(0)
+    end
+
+    it 'returns 1 colors in common' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("gbgg")
+      master_code.answer
+
+      expect(master_code.in_common).to eq(1)
+    end
+
+    it 'returns 2 colors in common' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("bgrg")
+      master_code.answer
+
+      expect(master_code.in_common).to eq(2)
+    end
+
+    it 'returns 3 colors in common' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("bbrg")
+      master_code.answer
+
+      expect(master_code.in_common).to eq(3)
+    end
+
+    it 'returns 4 colors in common' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rbrb")
+      master_code.answer
+
+      expect(master_code.in_common).to eq(4)
+    end
   end
 end
