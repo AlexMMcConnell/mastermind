@@ -34,7 +34,45 @@ describe 'Game' do
   end
 
   describe '#answer' do
+    it 'returns the code if player cheats' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("c")
 
+      expect(master_code.answer).to eq(master_code.code)
+    end
+
+    it 'returns too short if the guess is less than four' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrr")
+
+      expect(master_code.answer).to eq("Too short!")
+    end
+
+    it 'returns too long if the guess is more than four' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrrrr")
+
+      expect(master_code.answer).to eq("Too long!")
+    end
+
+    it 'returns a string of correct elements and positions if guess is incorrect' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrrr")
+
+      expect(master_code.answer).to eq(master_code.result_output)
+    end
+
+    it 'quits if the code is guessed correctly' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbb")
+
+      expect(master_code.answer).to eq(master_code.quit)
+    end
   end
 
   describe '#in_common' do
