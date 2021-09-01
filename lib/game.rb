@@ -16,13 +16,16 @@ attr_reader :code,
   end
 
   def guesser
-    until @guess == "q"
+
+    until @guess == "quit"
       p "What's your guess?"
       print "> "
-      answer
+      if @guess != "quit"
+        answer
+        binding.pry
+      end
     end
-  gamedone = true # for testing
-  return true #     for testing
+    return true # for testing
   end
 
   def answer
@@ -49,7 +52,7 @@ attr_reader :code,
   You've taken 1 guess"
     else
       puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
-  You've taken #{store_guesses.count} guesses"
+  You've taken #{@guesses.count} guesses"
     end
   end
 
@@ -91,6 +94,6 @@ attr_reader :code,
   end
 
   def quit
-    @guess = "q"
+    @guess = "quit"
   end
 end
