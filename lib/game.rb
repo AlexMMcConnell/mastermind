@@ -1,14 +1,21 @@
-require "pry"
+require 'pry'
+require 'time'
 
 class Game
 attr_reader :code,
             :guesses,
-            :guess
+            :guess,
+            :minutes,
+            :seconds,
+            :t
 
   def initialize(code)
     @code = code
     @guesses = []
     @guess = ""
+    @minutes = 0
+    @seconds = 0
+    @t = 0
   end
 
   def store_guesses
@@ -16,13 +23,12 @@ attr_reader :code,
   end
 
   def guesser
-
+    @t = Time.now
     until @guess == "quit"
       p "What's your guess?"
       print "> "
       if @guess != "quit"
         answer
-        binding.pry
       end
     end
     return true # for testing
@@ -57,12 +63,13 @@ attr_reader :code,
   end
 
   def correct_guess
+    # end_time
     if @guesses.count == 1
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over time.
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{@minutes} minutes, #{@seconds} seconds.
 
   Do you want to (p)lay again or (q)uit?"
     else
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over time.
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{@minutes} minutes, #{@seconds} seconds.
 
   Do you want to (p)lay again or (q)uit?"
     end
@@ -95,5 +102,12 @@ attr_reader :code,
 
   def quit
     @guess = "quit"
+  end
+
+  def end_time
+    t2 = Time.now
+    elapsed_time = (t2 - t).to_i
+    @minutes = (elapsed_time / 60).to_i
+    @seconds = (elapsed_time - @minutes * 60).to_i
   end
 end
