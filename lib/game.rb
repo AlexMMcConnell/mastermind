@@ -16,13 +16,10 @@ attr_reader :code,
   end
 
   def guesser
-    until @guess == @code
+    until @guess == "q"
       p "What's your guess?"
       print "> "
       answer
-      if @guess == "q"
-        break
-      end
     end
   gamedone = true # for testing
   return true #     for testing
@@ -32,21 +29,15 @@ attr_reader :code,
     @guess = gets.chomp.to_s.downcase
       if @guess == "c"
         p @code
+      elsif @guess == "q"
+        exit
       elsif @guess.length < 4
         p "Too short!"
       elsif @guess.length > 4
         p "Too long!"
       else
-        in_common
-        checker
         store_guesses
-        if store_guesses.count == 1
-          puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
-  You've taken #{store_guesses.count} guess"
-        else
-          puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
-  You've taken #{store_guesses.count} guesses"
-        end
+        result_output
       end
   end
 
@@ -72,5 +63,9 @@ attr_reader :code,
       end
     end
     return 4 - split_guesscode.length
+  end
+
+  def quit
+    @guess = "q"
   end
 end
