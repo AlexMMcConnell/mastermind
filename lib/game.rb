@@ -108,6 +108,7 @@ attr_reader :code,
     t2 = Time.now
     elapsed_time = (t2 - t).to_i
     @minutes = (elapsed_time / 60).to_i
-    @seconds = (elapsed_time - @minutes * 60).to_i
+    @seconds = elapsed_time - @minutes * 60
+    return elapsed_time
   end
 end
