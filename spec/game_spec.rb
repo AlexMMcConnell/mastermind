@@ -19,18 +19,14 @@ describe 'Game' do
   end
 
   describe '#store_guesses' do
-    xit 'stores guesses' do
-      code_new = "rrbb"
-      master_code = Game.new(code_new)
-      master_code.store_guesses("guess1")
-      master_code.store_guesses("guess2")
-
-      expect(master_code.guesses).to eq(["guess1", "guess2"])
-    end
-  end
-
-  describe '#checker' do
-
+    # it 'stores guesses' do
+    #   code_new = "rrbb"
+    #   master_code = Game.new(code_new)
+    #   master_code.store_guesses("guess1")
+    #   master_code.store_guesses("guess2")
+    #
+    #   expect(master_code.guesses).to eq(["guess1", "guess2"])
+    # end
   end
 
   describe '#answer' do
@@ -72,6 +68,44 @@ describe 'Game' do
       allow(master_code).to receive(:gets).and_return("rrbb")
 
       expect(master_code.answer).to eq(master_code.quit)
+    end
+  end
+
+  describe '#checker' do
+    it 'returns 0 if no colors match the code' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("gggg")
+      master_code.answer
+
+      expect(master_code.checker).to eq(0)
+    end
+
+    it 'returns 1 if one color matches the code' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("ggbg")
+      master_code.answer
+
+      expect(master_code.checker).to eq(1)
+    end
+
+    it 'returns 2 if two color matches the code' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("grbg")
+      master_code.answer
+
+      expect(master_code.checker).to eq(2)
+    end
+
+    it 'returns 3 if three color matches the code' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbg")
+      master_code.answer
+
+      expect(master_code.checker).to eq(3)
     end
   end
 
