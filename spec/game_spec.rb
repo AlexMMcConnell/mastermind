@@ -18,7 +18,7 @@ describe 'Game' do
     end
   end
 
-  describe '#store_guesses' do
+  # describe '#store_guesses' do
     # it 'stores guesses' do
     #   code_new = "rrbb"
     #   master_code = Game.new(code_new)
@@ -27,6 +27,12 @@ describe 'Game' do
     #
     #   expect(master_code.guesses).to eq(["guess1", "guess2"])
     # end
+  # end
+
+  describe '#guesser' do
+    it '' do
+
+    end
   end
 
   describe '#answer' do
@@ -68,6 +74,23 @@ describe 'Game' do
       allow(master_code).to receive(:gets).and_return("rrbb")
 
       expect(master_code.answer).to eq(master_code.quit)
+    end
+  end
+
+  # describe '#result_output' do
+  #   it 'returns a string of correct elements and positions' do
+  #
+  #   end
+  # end
+
+  describe '#correct_guess' do
+    it 'outputs quit if called' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbb")
+      master_code.answer
+
+      expect(master_code.correct_guess).to eq(master_code.quit)
     end
   end
 
@@ -153,6 +176,16 @@ describe 'Game' do
       master_code.answer
 
       expect(master_code.in_common).to eq(4)
+    end
+  end
+
+  describe '#quit' do
+    it 'sets guess equal to q' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      master_code.quit
+
+      expect(master_code.guess).to eq("q")
     end
   end
 end
