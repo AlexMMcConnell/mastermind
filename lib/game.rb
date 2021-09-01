@@ -41,6 +41,31 @@ attr_reader :code,
       end
   end
 
+  def result_output
+    if @guess == @code
+      correct_guess
+    elsif @guesses.count == 1
+      puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
+  You've taken 1 guess"
+    else
+      puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
+  You've taken #{store_guesses.count} guesses"
+    end
+  end
+
+  def correct_guess
+    if @guesses.count == 1
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over time.
+
+  Do you want to (p)lay again or (q)uit?"
+    else
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over time.
+
+  Do you want to (p)lay again or (q)uit?"
+    end
+    quit
+  end
+
   def checker #this will check the guess and see if it is correct!
     split_mastercode = @code.split("")
     split_guesscode = @guess.split("")
