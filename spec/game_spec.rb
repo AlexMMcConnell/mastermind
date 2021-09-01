@@ -18,20 +18,26 @@ describe 'Game' do
     end
   end
 
-  # describe '#store_guesses' do
-    # it 'stores guesses' do
-    #   code_new = "rrbb"
-    #   master_code = Game.new(code_new)
-    #   master_code.store_guesses("guess1")
-    #   master_code.store_guesses("guess2")
-    #
-    #   expect(master_code.guesses).to eq(["guess1", "guess2"])
-    # end
-  # end
+  describe '#store_guesses' do
+    it 'stores guesses' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrrr")
+      master_code.answer
+      allow(master_code).to receive(:gets).and_return("rrbb")
+      master_code.answer
+
+      expect(master_code.guesses).to eq(["rrrr", "rrbb"])
+    end
+  end
 
   describe '#guesser' do
-    it '' do
+    it 'stops running once guess = q' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("quit")
 
+      expect(master_code.guesser).to eq(true)
     end
   end
 
@@ -180,12 +186,12 @@ describe 'Game' do
   end
 
   describe '#quit' do
-    it 'sets guess equal to q' do
+    it 'sets guess equal to quit' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       master_code.quit
 
-      expect(master_code.guess).to eq("q")
+      expect(master_code.guess).to eq("quit")
     end
   end
 end
