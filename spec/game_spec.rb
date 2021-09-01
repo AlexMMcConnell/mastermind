@@ -93,16 +93,15 @@ describe 'Game' do
     end
   end
 
-  describe '#result_output' do
-    it 'returns correct_guess if the guess is correct' do
-      code_new = "rrbb"
-      master_code = Game.new(code_new)
-      allow(master_code).to receive(:gets).and_return("rrbb")
-      master_code.answer
-
-      expect(master_code.result_output).to eq(master_code.correct_guess)
-    end
-  end
+  # describe '#result_output' do
+  #   it 'returns correct_guess if the guess is correct' do
+  #     code_new = "rrbb"
+  #     master_code = Game.new(code_new)
+  #     allow(master_code).to receive(:gets).and_return("rrbb")
+  #
+  #     expect(master_code.result_output).to eq(master_code.correct_guess)
+  #   end
+  # end
 
   describe '#correct_guess' do
     it 'outputs quit if called' do
@@ -209,4 +208,38 @@ describe 'Game' do
       expect(master_code.guess).to eq("quit")
     end
   end
+
+  describe '#end_time' do
+    it 'calculates the elapsed time' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbb")
+      master_code.guesser
+      sleep(5)
+
+      expect(master_code.end_time).to eq(5)
+    end
+
+    # it 'returns a value in seconds' do
+    #   code_new = "rrbb"
+    #   master_code = Game.new(code_new)
+    #   allow(master_code).to receive(:gets).and_return("rrbb")
+    #   master_code.guesser
+    #   sleep(3)
+    #
+    #   expect(master_code.seconds).to eq(3)
+    # end
+
+    it 'returns a value in minutes' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbb")
+      master_code.guesser
+      sleep(3)
+
+      expect(master_code.minutes).to eq(0)
+    end
+  end
 end
+
+# finish result_output test and finish seconds test
