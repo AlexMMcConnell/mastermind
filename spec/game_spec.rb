@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/game'
+require 'time'
 
 describe 'Game' do
   describe '#initialize' do
@@ -32,12 +33,21 @@ describe 'Game' do
   end
 
   describe '#guesser' do
-    it 'stops running once guess = q' do
+    it 'stops running once guess = quit' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("quit")
 
       expect(master_code.guesser).to eq(true)
+    end
+
+    it 'Starts a times when called' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrrr")
+      allow(Time).to receive(:now).and_return("2021-08-18 16:37:20")
+
+      expect(Time.now).to eq("2021-08-18 16:37:20")
     end
   end
 
@@ -83,11 +93,16 @@ describe 'Game' do
     end
   end
 
-  # describe '#result_output' do
-  #   it 'returns a string of correct elements and positions' do
-  #
-  #   end
-  # end
+  describe '#result_output' do
+    it 'returns correct_guess if the guess is correct' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("rrbb")
+      master_code.answer
+
+      expect(master_code.result_output).to eq(master_code.correct_guess)
+    end
+  end
 
   describe '#correct_guess' do
     it 'outputs quit if called' do
