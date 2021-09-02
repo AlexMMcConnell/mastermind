@@ -9,8 +9,6 @@ puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
 
 answer = ""
 generator = CodeGenerator.new
-mastercode = generator.creator
-newgame = Game.new(mastercode)
 
 until answer == "q"
   print "> "
@@ -26,6 +24,8 @@ until answer == "q"
 (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
 
 "
+    mastercode = generator.creator
+    newgame = Game.new(mastercode)
     newgame.guesser
   end
 end
