@@ -52,24 +52,28 @@ attr_reader :code,
     if @guess == code
       correct_guess
     elsif @guesses.count == 1
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions
-You've taken 1 guess"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct
+elements with #{position_checker} in the correct positions. You've taken
+1 guess"
     else
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions
-You've taken #{@guesses.count} guesses"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct
+elements with #{position_checker} in the correct positions. You've taken
+#{@guesses.count} guesses."
     end
   end
 
   def correct_guess
     end_timer
     if @guesses.count == 1
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_timer}
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}'
 
-Do you want to (p)lay again or (q)uit?"
+in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?"
     else
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{end_timer}
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}'
 
-Do you want to (p)lay again or (q)uit?"
+in #{guesses.count} guesses over #{end_timer}.cDo you want to (p)lay again
+
+or (q)uit?"
     end
     quit
   end
