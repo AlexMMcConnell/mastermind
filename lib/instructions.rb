@@ -21,17 +21,19 @@ class Text
 
   def beginner_sequence
     print "I have generated a beginner sequence with four elements made up of: (r)ed,
-(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game."
+(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. Use (h)istory
+to see your guess history."
   end
 
   def intermediate_sequence
     print "I have generated an intermediate sequence with six elements made up of: (r)ed,
-(g)reen, (b)lue, (y)ellow, and (o)range. Use (q)uit at any time to end the game."
+(g)reen, (b)lue, (y)ellow, and (o)range. Use (q)uit at any time to end the game. Use
+(h)istory to see your guess history."
   end
 
   def advanced_sequence
     print "I have generated an advanced sequence with eight elements made up of: (r)ed,
 (g)reen, (b)lue, (y)ellow, (o)range, and (p)urple. Use (q)uit at any time to end
-the game."
+the game. Use (h)istory to see your guess history."
   end
 end
