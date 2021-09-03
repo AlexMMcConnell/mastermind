@@ -17,22 +17,22 @@ attr_reader :code,
     @guesses << @guess
   end
 
-  def guesser
+  def game_runner
     until @guess == "quit"
       p "What's your guess?"
       print "> "
       if @guess != "quit"
-        answer
+        user_response
       end
     end
 
     true # for testing
   end
 
-  def answer
+  def user_response
     @guess = gets.chomp.to_s.downcase
     if @guess == "c"
-      p @code
+      p code
     elsif @guess == "q"
       exit
     elsif @guess.length < 4
@@ -41,38 +41,38 @@ attr_reader :code,
       p "Too long!"
     else
       store_guesses
-      result_output
+      response_output
     end
   end
 
-  def result_output
-    if @guess == @code
+  def response_output
+    if @guess == code
       correct_guess
     elsif @guesses.count == 1
-      puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
-  You've taken 1 guess"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions
+You've taken 1 guess"
     else
-      puts "'#{@guess.upcase}' has #{in_common} of the correct elements with #{checker} in the correct positions
-  You've taken #{@guesses.count} guesses"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions
+You've taken #{@guesses.count} guesses"
     end
   end
 
   def correct_guess
-    end_time
+    end_timer
     if @guesses.count == 1
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_time}
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_timer}
 
-  Do you want to (p)lay again or (q)uit?"
+Do you want to (p)lay again or (q)uit?"
     else
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{end_time}
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{end_timer}
 
-  Do you want to (p)lay again or (q)uit?"
+Do you want to (p)lay again or (q)uit?"
     end
     quit
   end
 
-  def checker #this will check the guess and see if it is correct!
-    split_mastercode = @code.split("")
+  def position_checker #this will check the guess and see if it is correct!
+    split_mastercode = code.split("")
     split_guesscode = @guess.split("")
     shared = 0
     split_mastercode.zip(split_guesscode).each do |master, guess|
@@ -83,8 +83,8 @@ attr_reader :code,
     shared
   end
 
-  def in_common
-    split_mastercode = @code.split("")
+  def elements_in_common
+    split_mastercode = code.split("")
     split_guesscode = @guess.split("")
     split_mastercode.find_all do |master|
       duplicate_position = split_guesscode.index(master)
@@ -99,7 +99,7 @@ attr_reader :code,
     @guess = "quit"
   end
 
-  def end_time
+  def end_timer
     endtime = Time.now
     elapsed_time = (endtime - @starttime).to_i
     minutes = (elapsed_time / 60).to_i
