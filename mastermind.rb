@@ -9,12 +9,13 @@ puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
 
 answer = ""
 generator = CodeGenerator.new
+text = Text.new
 
 until answer == "q"
   print "> "
   answer = gets.chomp.to_s
   if answer == "i"
-    instructions
+    text.instructions
     print '
 
 '
@@ -26,6 +27,6 @@ until answer == "q"
 "
     mastercode = generator.creator
     newgame = Game.new(mastercode)
-    newgame.guesser
+    newgame.game_runner
   end
 end
