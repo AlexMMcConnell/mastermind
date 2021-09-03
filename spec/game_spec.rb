@@ -232,6 +232,12 @@ describe 'Game' do
   end
 
   describe '#end_timer' do
+    it 'returns how much time passed between beginning and end of game' do
+      code_new = "bbrrgg"
+      master_code = Game.new(code_new)
+      sleep(3)
 
+      expect(master_code.end_timer).to eq("0 minutes and 3 seconds")
+    end
   end
 end
