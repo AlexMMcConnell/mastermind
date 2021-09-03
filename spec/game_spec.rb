@@ -232,36 +232,6 @@ describe 'Game' do
   end
 
   describe '#end_time' do
-    # it 'calculates the elapsed time' do
-    #   code_new = "rrbb"
-    #   master_code = Game.new(code_new)
-    #   allow(master_code).to receive(:gets).and_return("rrbb")
-    #   master_code.guesser
-    #   sleep(5)
-    #
-    #   expect(master_code.end_time).to eq(5)
-    # end
-    #
-    #  it 'returns a value in seconds' do
-    #    code_new = "rrbb"
-    #    master_code = Game.new(code_new)
-    #    allow(master_code).to receive(:gets).and_return("rrbb")
-    #    master_code.guesser
-    #    sleep(3)
-    #
-    #    expect(master_code.seconds).to eq(3)
-    #  end
-    #
-    # it 'returns a value in minutes' do
-    #   code_new = "rrbb"
-    #   master_code = Game.new(code_new)
-    #   allow(master_code).to receive(:gets).and_return("rrbb")
-    #   master_code.guesser
-    #   sleep(3)
-    #
-    #   expect(master_code.minutes).to eq(0)
-    # end
+    
   end
 end
-
-# finish result_output test and finish seconds test
