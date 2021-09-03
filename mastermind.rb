@@ -42,5 +42,6 @@ until answer == "q" || answer == "quit"
       mastercode = generator.creator
       newgame = Game.new(mastercode)
       newgame.game_runner
+      difficulty = "invalid"
   end
 end
