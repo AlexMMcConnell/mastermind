@@ -35,6 +35,9 @@ attr_reader :code,
       p code
     elsif @guess == "q"
       exit
+    elsif @guess == "h"
+      history
+      p "-------------------------"
     elsif @guess.length < @code.length
       p "Too short!"
     elsif @guess.length > @code.length
@@ -105,5 +108,12 @@ Do you want to (p)lay again or (q)uit?"
     minutes = (elapsed_time / 60).to_i
     seconds = elapsed_time - minutes * 60
     "#{minutes} minutes and #{seconds} seconds"
+  end
+
+  def history
+    p "Guess History:"
+    @guesses.each do |guess|
+      p guess.upcase
+    end
   end
 end
