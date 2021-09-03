@@ -35,9 +35,9 @@ attr_reader :code,
       p code
     elsif @guess == "q"
       exit
-    elsif @guess.length < 4
+    elsif @guess.length < @code.length
       p "Too short!"
-    elsif @guess.length > 4
+    elsif @guess.length > @code.length
       p "Too long!"
     else
       store_guesses
@@ -92,7 +92,7 @@ Do you want to (p)lay again or (q)uit?"
         split_guesscode.delete_at(duplicate_position)
       end
     end
-    4 - split_guesscode.length
+    @code.length - split_guesscode.length
   end
 
   def quit
