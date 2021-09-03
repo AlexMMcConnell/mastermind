@@ -4,18 +4,13 @@ require 'time'
 class Game
 attr_reader :code,
             :guesses,
-            :guess,
-            :minutes,
-            :seconds,
-            :t
+            :guess
 
   def initialize(code)
     @code = code
     @guesses = []
     @guess = ""
-    @minutes = 0
-    @seconds = 0
-    @t = 0
+    @starttime = Time.now
   end
 
   def store_guesses
@@ -23,7 +18,6 @@ attr_reader :code,
   end
 
   def guesser
-    @t = Time.now
     until @guess == "quit"
       p "What's your guess?"
       print "> "
@@ -31,23 +25,24 @@ attr_reader :code,
         answer
       end
     end
-    return true # for testing
+
+    true # for testing
   end
 
   def answer
     @guess = gets.chomp.to_s.downcase
-      if @guess == "c"
-        p @code
-      elsif @guess == "q"
-        exit
-      elsif @guess.length < 4
-        p "Too short!"
-      elsif @guess.length > 4
-        p "Too long!"
-      else
-        store_guesses
-        result_output
-      end
+    if @guess == "c"
+      p @code
+    elsif @guess == "q"
+      exit
+    elsif @guess.length < 4
+      p "Too short!"
+    elsif @guess.length > 4
+      p "Too long!"
+    else
+      store_guesses
+      result_output
+    end
   end
 
   def result_output
@@ -63,13 +58,13 @@ attr_reader :code,
   end
 
   def correct_guess
-    # end_time
+    end_time
     if @guesses.count == 1
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{@minutes} minutes, #{@seconds} seconds.
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_time}
 
   Do you want to (p)lay again or (q)uit?"
     else
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{@minutes} minutes, #{@seconds} seconds.
+      puts "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{end_time}
 
   Do you want to (p)lay again or (q)uit?"
     end
@@ -85,7 +80,7 @@ attr_reader :code,
         shared += 1
       end
     end
-    return shared
+    shared
   end
 
   def in_common
@@ -97,7 +92,7 @@ attr_reader :code,
         split_guesscode.delete_at(duplicate_position)
       end
     end
-    return 4 - split_guesscode.length
+    4 - split_guesscode.length
   end
 
   def quit
@@ -105,10 +100,10 @@ attr_reader :code,
   end
 
   def end_time
-    t2 = Time.now
-    elapsed_time = (t2 - t).to_i
-    @minutes = (elapsed_time / 60).to_i
-    @seconds = elapsed_time - @minutes * 60
-    return elapsed_time
+    endtime = Time.now
+    elapsed_time = (endtime - @starttime).to_i
+    minutes = (elapsed_time / 60).to_i
+    seconds = elapsed_time - minutes * 60
+    "#{minutes} minutes and #{seconds} seconds"
   end
 end
