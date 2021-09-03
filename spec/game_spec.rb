@@ -24,21 +24,21 @@ describe 'Game' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrrr")
-      master_code.answer
+      master_code.user_response
       allow(master_code).to receive(:gets).and_return("rrbb")
-      master_code.answer
+      master_code.user_response
 
       expect(master_code.guesses).to eq(["rrrr", "rrbb"])
     end
   end
 
-  describe '#guesser' do
+  describe '#game_runner' do
     it 'stops running once guess = quit' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("quit")
 
-      expect(master_code.guesser).to eq(true)
+      expect(master_code.game_runner).to eq(true)
     end
 
     it 'Starts a times when called' do
@@ -51,13 +51,13 @@ describe 'Game' do
     end
   end
 
-  describe '#answer' do
+  describe '#user_response' do
     it 'returns the code if player cheats' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("c")
 
-      expect(master_code.answer).to eq(master_code.code)
+      expect(master_code.user_response).to eq(master_code.code)
     end
 
     it 'returns too short if the guess is less than four' do
@@ -65,7 +65,7 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrr")
 
-      expect(master_code.answer).to eq("Too short!")
+      expect(master_code.user_response).to eq("Too short!")
     end
 
     it 'returns too long if the guess is more than four' do
@@ -73,7 +73,7 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrrrr")
 
-      expect(master_code.answer).to eq("Too long!")
+      expect(master_code.user_response).to eq("Too long!")
     end
 
     it 'returns a string of correct elements and positions if guess is incorrect' do
@@ -81,7 +81,7 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrrr")
 
-      expect(master_code.answer).to eq(master_code.result_output)
+      expect(master_code.user_response).to eq(master_code.response_output)
     end
 
     it 'quits if the code is guessed correctly' do
@@ -89,40 +89,40 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrbb")
 
-      expect(master_code.answer).to eq(master_code.quit)
+      expect(master_code.user_response).to eq(master_code.quit)
     end
   end
 
- describe '#result_output' do
+ describe '#response_output' do
    it 'returns correct_guess if the guess is correct' do
      code_new = "rrbb"
      master_code = Game.new(code_new)
      allow(master_code).to receive(:gets).and_return("rrbb")
-     master_code.answer
+     master_code.user_response
 
      expect(master_code.guess).to eq(master_code.correct_guess)
    end
 
-   it 'returns proper in common and checker results for 1 guess' do
+   it 'returns proper in common and position_checker results for 1 guess' do
      code_new = "rrbb"
      master_code = Game.new(code_new)
      allow(master_code).to receive(:gets).and_return("brrb")
-     master_code.answer
+     master_code.user_response
 
-     expect(master_code.in_common).to eq(4)
-     expect(master_code.checker).to eq(2)
+     expect(master_code.elements_in_common).to eq(4)
+     expect(master_code.position_checker).to eq(2)
    end
 
-   it 'returns proper in common and checker results for 2 guesses' do
+   it 'returns proper in common and position_checker results for 2 guesses' do
      code_new = "rrbb"
      master_code = Game.new(code_new)
      allow(master_code).to receive(:gets).and_return("bbbb")
-     master_code.answer
+     master_code.user_response
      allow(master_code).to receive(:gets).and_return("rrby")
-     master_code.answer
+     master_code.user_response
 
-     expect(master_code.in_common).to eq(3)
-     expect(master_code.checker).to eq(3)
+     expect(master_code.elements_in_common).to eq(3)
+     expect(master_code.position_checker).to eq(3)
      expect(master_code.guesses.count).to eq(2)
    end
  end
@@ -136,88 +136,88 @@ describe 'Game' do
     end
   end
 
-  describe '#checker' do
+  describe '#position_checker' do
     it 'returns 0 if no colors match the code' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("gggg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.checker).to eq(0)
+      expect(master_code.position_checker).to eq(0)
     end
 
     it 'returns 1 if one color matches the code' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("ggbg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.checker).to eq(1)
+      expect(master_code.position_checker).to eq(1)
     end
 
     it 'returns 2 if two color matches the code' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("grbg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.checker).to eq(2)
+      expect(master_code.position_checker).to eq(2)
     end
 
     it 'returns 3 if three color matches the code' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrbg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.checker).to eq(3)
+      expect(master_code.position_checker).to eq(3)
     end
   end
 
-  describe '#in_common' do
+  describe '#elements_in_common' do
     it 'returns 0 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("gggg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.in_common).to eq(0)
+      expect(master_code.elements_in_common).to eq(0)
     end
 
     it 'returns 1 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("gbgg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.in_common).to eq(1)
+      expect(master_code.elements_in_common).to eq(1)
     end
 
     it 'returns 2 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("bgrg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.in_common).to eq(2)
+      expect(master_code.elements_in_common).to eq(2)
     end
 
     it 'returns 3 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("bbrg")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.in_common).to eq(3)
+      expect(master_code.elements_in_common).to eq(3)
     end
 
     it 'returns 4 colors in common' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rbrb")
-      master_code.answer
+      master_code.user_response
 
-      expect(master_code.in_common).to eq(4)
+      expect(master_code.elements_in_common).to eq(4)
     end
   end
 
@@ -231,7 +231,7 @@ describe 'Game' do
     end
   end
 
-  describe '#end_time' do
-    
+  describe '#end_timer' do
+
   end
 end
