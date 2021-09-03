@@ -60,7 +60,15 @@ describe 'Game' do
       expect(master_code.user_response).to eq(master_code.code)
     end
 
-    it 'returns too short if the guess is less than four' do
+    it 'prints player history and returns a line if player asks for history' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("h")
+
+      expect(master_code.user_response).to eq("-------------------------")
+    end
+
+    it 'returns too short if the guess is less than the master code length' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrr")
@@ -68,7 +76,7 @@ describe 'Game' do
       expect(master_code.user_response).to eq("Too short!")
     end
 
-    it 'returns too long if the guess is more than four' do
+    it 'returns too long if the guess is more than the master code length' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("rrrrr")
@@ -238,6 +246,16 @@ describe 'Game' do
       sleep(3)
 
       expect(master_code.end_timer).to eq("0 minutes and 3 seconds")
+    end
+  end
+
+  describe '#history' do
+    it 'can print history of messages' do
+      code_new = "bbrrgg"
+      master_code = Game.new(code_new)
+      @guesses = ["guess1", "guess2", "guess3"]
+
+      expect(master_code.history).to eq(master_code.guesses)
     end
   end
 end
