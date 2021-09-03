@@ -29,4 +29,8 @@ class CodeGenerator
     end
     mastercode.flatten.join
   end
+
+  def code_length
+    creator.length
+  end
 end
