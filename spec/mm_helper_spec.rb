@@ -95,17 +95,6 @@ describe 'Helper' do
     end
   end
 
-  # describe '#instantiator' do
-  #   it 'instantiates a game' do
-  #     text = Text.new
-  #     helper = Helper.new(text)
-  #     allow(helper).to receive(:gets).and_return("p")
-  #     helper.instantiator
-  #
-  #     expect(helper.instantiator).to eq(newgame.game_runner)
-  #   end
-  # end
-
   describe '#answer_options' do
     it 'prints the instructions' do
       text = Text.new
@@ -115,14 +104,6 @@ describe 'Helper' do
       expect(helper.answer_options).to eq(text.instructions)
     end
 
-    # it 'runs the game loop' do
-    #   text = Text.new
-    #   helper = Helper.new(text)
-    #   allow(helper).to receive(:gets).and_return("i")
-    #
-    #   expect(helper.answer_options).to eq(text.instructions)
-    # end
-
     it 'returns invalid input' do
       text = Text.new
       helper = Helper.new(text)
@@ -131,10 +112,4 @@ describe 'Helper' do
       expect(helper.answer_options).to eq(text.main_menu)
     end
   end
-
-  # describe '#game_start' do
-  #   it '' do
-  #
-  #   end
-  # end
 end
