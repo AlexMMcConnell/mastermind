@@ -96,8 +96,13 @@ describe 'Helper' do
   end
 
   # describe '#instantiator' do
-  #   it 'instantiates ' do
+  #   it 'instantiates a game' do
+  #     text = Text.new
+  #     helper = Helper.new(text)
+  #     allow(helper).to receive(:gets).and_return("p")
+  #     helper.instantiator
   #
+  #     expect(helper.instantiator).to eq(newgame.game_runner)
   #   end
   # end
 
