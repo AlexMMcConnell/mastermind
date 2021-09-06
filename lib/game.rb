@@ -32,6 +32,7 @@ attr_reader :code,
   def user_response
     @guess = gets.chomp.to_s.downcase
     if guess_options != nil
+      @guess
     elsif (@guess.length < @code.length)
       p "Too short!"
     elsif (@guess.length > @code.length)
