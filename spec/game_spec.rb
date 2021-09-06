@@ -91,7 +91,7 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("c")
 
-      expect(master_code.user_response).to eq(master_code.code)
+      expect(master_code.user_response).to eq("c")
     end
 
     it 'prints player history and returns a line if player asks for history' do
@@ -99,7 +99,7 @@ describe 'Game' do
       master_code = Game.new(code_new)
       allow(master_code).to receive(:gets).and_return("h")
 
-      expect(master_code.user_response).to eq("-------------------------")
+      expect(master_code.user_response).to eq("h")
     end
 
     it 'quits if the player types quit' do
