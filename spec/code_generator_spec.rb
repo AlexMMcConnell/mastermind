@@ -51,5 +51,10 @@ describe 'CodeGenerator' do
 
       expect(generate.code_length).to eq(8)
     end
+    it 'is an empty array if invalid input' do
+      generate = CodeGenerator.new("sfdaw")
+
+      expect(generate.code_length).to eq(0)
+    end
   end
 end
