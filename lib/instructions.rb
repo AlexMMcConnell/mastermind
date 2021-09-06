@@ -36,4 +36,9 @@ to see your guess history."
 (g)reen, (b)lue, (y)ellow, (o)range, and (p)urple. Use (q)uit at any time to end
 the game. Use (h)istory to see your guess history."
   end
+
+  def main_menu
+    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    print "> "
+  end
 end
