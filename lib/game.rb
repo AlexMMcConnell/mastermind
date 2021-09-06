@@ -32,10 +32,9 @@ attr_reader :code,
   def user_response
     @guess = gets.chomp.to_s.downcase
     if guess_options != nil
-      guess_options
-    elsif (@guess.length < @code.length) && (guess_options == nil)
+    elsif (@guess.length < @code.length)
       p "Too short!"
-    elsif (@guess.length > @code.length) && (guess_options == nil)
+    elsif (@guess.length > @code.length)
       p "Too long!"
     else
       store_guesses
@@ -47,7 +46,8 @@ attr_reader :code,
     if (@guess == "c") || (@guess == "cheat")
       p code
     elsif (@guess == "q") || (@guess == "quit")
-      puts "Game has been aborted. Are you sure you want to (q)uit?"
+      print "Game has been aborted. Are you sure you want to (q)uit?
+> "
       @guess = "leave"
     elsif (@guess == "h") || (@guess == "history")
       history
@@ -73,15 +73,14 @@ elements with #{position_checker} in the correct positions. You've taken
   def correct_guess
     end_timer
     if @guesses.count == 1
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}'
-
-in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?"
+      print "Congratulations! You guessed the sequence '#{@guess.upcase}'
+in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?
+> "
     else
-      puts "Congratulations! You guessed the sequence '#{@guess.upcase}'
-
-in #{guesses.count} guesses over #{end_timer}.cDo you want to (p)lay again
-
-or (q)uit?"
+      print "Congratulations! You guessed the sequence '#{@guess.upcase}'
+in #{guesses.count} guesses over #{end_timer}. Do you want to (p)lay again
+or (q)uit?
+> "
     end
     quit
   end
