@@ -33,10 +33,10 @@ describe 'Game' do
   end
 
   describe '#game_runner' do
-    it 'stops running once guess = quit' do
+    it 'stops running once guess = leave' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
-      allow(master_code).to receive(:gets).and_return("quit")
+      allow(master_code).to receive(:gets).and_return("leave")
 
       expect(master_code.game_runner).to eq(true)
     end
@@ -52,22 +52,6 @@ describe 'Game' do
   end
 
   describe '#user_response' do
-    it 'returns the code if player cheats' do
-      code_new = "rrbb"
-      master_code = Game.new(code_new)
-      allow(master_code).to receive(:gets).and_return("c")
-
-      expect(master_code.user_response).to eq(master_code.code)
-    end
-
-    it 'prints player history and returns a line if player asks for history' do
-      code_new = "rrbb"
-      master_code = Game.new(code_new)
-      allow(master_code).to receive(:gets).and_return("h")
-
-      expect(master_code.user_response).to eq("-------------------------")
-    end
-
     it 'returns too short if the guess is less than the master code length' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
@@ -98,6 +82,33 @@ describe 'Game' do
       allow(master_code).to receive(:gets).and_return("rrbb")
 
       expect(master_code.user_response).to eq(master_code.quit)
+    end
+  end
+
+  describe '#guess_options' do
+    it 'returns the code if player cheats' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("c")
+
+      expect(master_code.user_response).to eq(master_code.code)
+    end
+
+    it 'prints player history and returns a line if player asks for history' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("h")
+
+      expect(master_code.user_response).to eq("-------------------------")
+    end
+
+    it 'quits if the player types quit' do
+      code_new = "rrbb"
+      master_code = Game.new(code_new)
+      allow(master_code).to receive(:gets).and_return("quit")
+      master_code.user_response
+
+      expect(master_code.guess).to eq("leave")
     end
   end
 
@@ -230,12 +241,12 @@ describe 'Game' do
   end
 
   describe '#quit' do
-    it 'sets guess equal to quit' do
+    it 'sets guess equal to leave' do
       code_new = "rrbb"
       master_code = Game.new(code_new)
       master_code.quit
 
-      expect(master_code.guess).to eq("quit")
+      expect(master_code.guess).to eq("leave")
     end
   end
 
