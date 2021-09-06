@@ -24,8 +24,10 @@ class CodeGenerator
       mastercode = shuffled_code[0..3]
     elsif difficulty == "intermediate" || difficulty == "i"
       mastercode = shuffled_code[0..5]
-    else difficulty == "advanced" || difficulty == "a"
+    elsif difficulty == "advanced" || difficulty == "a"
       mastercode = shuffled_code[0..7]
+    else
+      mastercode = []
     end
     mastercode.flatten.join
   end
