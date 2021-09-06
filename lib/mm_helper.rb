@@ -45,6 +45,8 @@ class Helper
       text.intermediate_sequence
     elsif difficulty == "advanced" || difficulty == "a"
       text.advanced_sequence
+    elsif difficulty == "quit" || difficulty == "q"
+      @guess = "leave"
     else
       p "Invalid input"
       difficulty = "invalid"
