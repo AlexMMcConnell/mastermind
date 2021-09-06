@@ -6,15 +6,16 @@ require 'pry'
 print "Welcome to MASTERMIND
 
 "
-puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+
 
 answer = ""
 text = Text.new
 difficulty = "invalid"
+puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+print "> "
+answer = gets.chomp.to_s
 
-until answer == "q" || answer == "quit"
-  print "> "
-  answer = gets.chomp.to_s
+until answer == "q" || answer == "quit" || answer == "yes"
   if answer == "i" || answer == "instructions"
     text.instructions
     print '
@@ -43,5 +44,10 @@ until answer == "q" || answer == "quit"
       newgame = Game.new(mastercode)
       newgame.game_runner
       difficulty = "invalid"
+  end
+  answer = gets.chomp.to_s
+  if answer != "q" || answer != "quit" || answer != "yes"
+    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    print "> "
   end
 end
