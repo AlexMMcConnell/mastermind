@@ -1,4 +1,5 @@
 class Helper
+  attr_reader :text
 
   def initialize(text)
     @text = text
@@ -9,42 +10,44 @@ class Helper
 
     "
     answer = ""
-    @text.main_menu
-    @answer = gets.chomp.to_s
+    text.main_menu
   end
 
   def answer_loop
+    @answer = gets.chomp.to_s
     until @answer == "q" || @answer == "quit" || @answer == "yes"
       answer_options
       @answer = gets.chomp.to_s
       if @answer != "q" || @answer != "quit" || @answer != "yes"
-        @text.main_menu
+        text.main_menu
       end
     end
+    true # for testing
   end
 
   def print_instructions
-    @text.instructions
-    @text.main_menu
+    text.instructions
+    text.main_menu
   end
 
   def difficulty_loop
     until difficulty_selector != "invalid"
       difficulty_selector
     end
+    true #for testing
   end
 
   def difficulty_selector
     difficulty = gets.chomp.to_s
     if difficulty == "beginner" || difficulty == "b"
-      @text.beginner_sequence
+      text.beginner_sequence
     elsif difficulty == "intermediate" || difficulty == "i"
-      @text.intermediate_sequence
+      text.intermediate_sequence
     elsif difficulty == "advanced" || difficulty == "a"
-      @text.advanced_sequence
+      text.advanced_sequence
     else
       p "Invalid input"
-      "invalid"
+      difficulty = "invalid"
     end
     difficulty
   end
@@ -54,7 +57,6 @@ class Helper
     mastercode = generator.creator
     newgame = Game.new(mastercode)
     newgame.game_runner
-    difficulty = "invalid"
   end
 
   def answer_options
@@ -67,7 +69,7 @@ class Helper
       instantiator
     else
       p "Invalid input."
-      @text.main_menu
+      text.main_menu
     end
   end
 
