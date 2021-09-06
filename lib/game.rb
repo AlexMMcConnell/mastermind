@@ -18,10 +18,10 @@ attr_reader :code,
   end
 
   def game_runner
-    until @guess == "quit"
+    until @guess == "leave"
       p "What's your guess?"
       print "> "
-      if @guess != "quit"
+      if @guess != "leave"
         user_response
       end
     end
@@ -31,20 +31,28 @@ attr_reader :code,
 
   def user_response
     @guess = gets.chomp.to_s.downcase
-    if @guess == "c"
-      p code
-    elsif @guess == "q"
-      exit
-    elsif @guess == "h"
-      history
-      p "-------------------------"
-    elsif @guess.length < @code.length
+    if guess_options != nil
+      guess_options
+    elsif (@guess.length < @code.length) && (guess_options == nil)
       p "Too short!"
-    elsif @guess.length > @code.length
+    elsif (@guess.length > @code.length) && (guess_options == nil)
       p "Too long!"
     else
       store_guesses
       response_output
+    end
+  end
+
+  def guess_options
+    if (@guess == "c") || (@guess == "cheat")
+      p code
+    elsif (@guess == "q") || (@guess == "quit")
+      puts "Game has been aborted. Are you sure you want to (q)uit?"
+      @guess = "leave"
+    elsif (@guess == "h") || (@guess == "history")
+      history
+      p "-------------------------"
+    else
     end
   end
 
@@ -103,7 +111,7 @@ or (q)uit?"
   end
 
   def quit
-    @guess = "quit"
+    @guess = "leave"
   end
 
   def end_timer
