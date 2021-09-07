@@ -1,5 +1,5 @@
 require './lib/code_generator'
-require './lib/instructions'
+require './lib/mastermind_text'
 require './lib/game'
 require './lib/mm_helper'
 require 'pry'
