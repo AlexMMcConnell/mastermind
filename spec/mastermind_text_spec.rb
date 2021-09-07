@@ -1,5 +1,5 @@
 require 'rspec'
-require './lib/instructions'
+require './lib/mastermind_text'
 
 describe 'MastermindText' do
   describe '#instructions' do
