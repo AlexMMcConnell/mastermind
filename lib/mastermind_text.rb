@@ -1,4 +1,4 @@
-class Text
+class MastermindText
 
   def instructions # outputs instructions for playing Mastermind into terminal
     print "Instructions for Mastermind:
