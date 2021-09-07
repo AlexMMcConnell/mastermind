@@ -1,8 +1,8 @@
-class Helper
+class MastermindHelper
   attr_reader :text
 
-  def initialize(text)
-    @text = text
+  def initialize
+    @text = MastermindText.new
   end
 
   def intro
