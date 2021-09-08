@@ -1,6 +1,3 @@
-require 'pry'
-require 'time'
-
 class Game
 attr_reader :code,
             :guesses,
@@ -112,7 +109,7 @@ attr_reader :code,
     elapsed_time = (endtime - @starttime).to_i
     minutes = (elapsed_time / 60).to_i
     seconds = elapsed_time - minutes * 60
-    "#{minutes} minutes and #{seconds} seconds"
+    "#{minutes} minutes \nand #{seconds} seconds"
   end
 
   def history
