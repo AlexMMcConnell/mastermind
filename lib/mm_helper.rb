@@ -6,9 +6,7 @@ class MastermindHelper
   end
 
   def intro
-    print "Welcome to MASTERMIND
-
-    "
+    text.warm_welcome
     answer = ""
     text.main_menu
   end
@@ -18,9 +16,6 @@ class MastermindHelper
     until @answer == "q" || @answer == "quit" || @answer == "yes"
       answer_options
       @answer = gets.chomp.to_s
-      if @answer != "q" || @answer != "quit" || @answer != "yes"
-        text.main_menu
-      end
     end
     true # for testing
   end
@@ -47,28 +42,35 @@ class MastermindHelper
       text.advanced_sequence
     elsif difficulty == "quit" || difficulty == "q"
       @guess = "leave"
+      difficulty = "invalid"
     else
-      p "Invalid input"
+      puts "Invalid input, returning to main menu."
       difficulty = "invalid"
     end
     difficulty
   end
 
   def instantiator
-    generator = CodeGenerator.new(difficulty_selector)
-    mastercode = generator.creator
-    newgame = Game.new(mastercode)
-    newgame.game_runner
+    difficulty = difficulty_selector
+    if difficulty != "invalid"
+      generator = CodeGenerator.new(difficulty)
+      mastercode = generator.creator
+      newgame = Game.new(mastercode)
+      newgame.game_runner
+    else
+      text.main_menu
+    end
   end
 
   def answer_options
     if @answer == "i" || @answer == "instructions"
       print_instructions
     elsif @answer == "p" || @answer == "play"
-      print "What difficulty would you like to play on: (b)eginner,
-      (i)ntermediate, or (a)dvanced?
-> "
+      text.select_difficulty
       instantiator
+    elsif @answer == "no" || @answer == "n"
+        text.main_menu
+    elsif @answer == "q" || @answer == "quit" || @answer == "yes"
     else
       p "Invalid input."
       text.main_menu
