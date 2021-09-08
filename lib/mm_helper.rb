@@ -1,17 +1,17 @@
 class MastermindHelper
   attr_reader :text
 
-  def initialize
+  def initialize # creates a new instance of the mastermind helper
     @text = MastermindText.new
   end
 
-  def intro
+  def intro # prints the introduction to the game
     text.warm_welcome
     answer = ""
     text.main_menu
   end
 
-  def answer_loop
+  def answer_loop # takes user input and determines which answer path to take
     @answer = gets.chomp.to_s
     until @answer == "q" || @answer == "quit" || @answer == "yes"
       answer_options
@@ -20,19 +20,19 @@ class MastermindHelper
     true # for testing
   end
 
-  def print_instructions
+  def print_instructions # prints the instructions, then returns to the main menu
     text.instructions
     text.main_menu
   end
 
-  def difficulty_loop
+  def difficulty_loop # loops until a valid difficulty is selected
     until difficulty_selector != "invalid"
       difficulty_selector
     end
     true #for testing
   end
 
-  def difficulty_selector
+  def difficulty_selector # selects a difficulty based on user input
     difficulty = gets.chomp.to_s
     if difficulty == "beginner" || difficulty == "b"
       text.beginner_sequence
@@ -50,7 +50,7 @@ class MastermindHelper
     difficulty
   end
 
-  def instantiator
+  def instantiator # starts the game based on difficulty: if difficulty is invalid returns to main menu
     difficulty = difficulty_selector
     if difficulty != "invalid"
       generator = CodeGenerator.new(difficulty)
@@ -62,7 +62,7 @@ class MastermindHelper
     end
   end
 
-  def answer_options
+  def answer_options # starts the logic loop of the main menu
     if @answer == "i" || @answer == "instructions"
       print_instructions
     elsif @answer == "p" || @answer == "play"
@@ -77,7 +77,7 @@ class MastermindHelper
     end
   end
 
-  def game_start
+  def game_start # starts the logic loop of the program using the answer loop
     intro
     answer_loop
   end
