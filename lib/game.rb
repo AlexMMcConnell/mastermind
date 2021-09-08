@@ -61,9 +61,9 @@ attr_reader :code,
     if @guess == code
       correct_guess
     elsif @guesses.count == 1
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've taken 1 guess"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've \ntaken 1 guess"
     else
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've taken #{@guesses.count} guesses."
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've \ntaken #{@guesses.count} guesses."
     end
   end
 
