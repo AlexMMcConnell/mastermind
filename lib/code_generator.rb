@@ -1,11 +1,11 @@
 class CodeGenerator
   attr_reader :difficulty
 
-  def initialize(difficulty)
+  def initialize(difficulty) # creates an instance of code_generator with a difficulty
     @difficulty = difficulty
   end
 
-  def shuffler
+  def shuffler # shuffles a string of potential colors
     if difficulty == "beginner" || difficulty == "b"
       beginner_init_code = "rrrrbbbbggggyyyy"
       beginner_init_code.split("").shuffle
@@ -18,7 +18,7 @@ class CodeGenerator
     end
   end
 
-  def creator
+  def creator # generates master code based off of shuffled colors
     shuffled_code = shuffler
     if difficulty == "beginner" || difficulty == "b"
       mastercode = shuffled_code[0..3]
@@ -32,7 +32,7 @@ class CodeGenerator
     mastercode.flatten.join
   end
 
-  def code_length
+  def code_length # helper method for testing
     creator.length
   end
 end
