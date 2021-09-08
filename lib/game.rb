@@ -4,7 +4,7 @@ attr_reader :code,
             :guess,
             :text
 
-  def initialize(code)
+  def initialize(code) # creates an instance of the game with a code, starts a timer
     @code = code
     @guesses = []
     @guess = ""
@@ -12,11 +12,11 @@ attr_reader :code,
     @text = MastermindText.new
   end
 
-  def store_guesses
+  def store_guesses # stores user's guesses
     @guesses << @guess
   end
 
-  def game_runner
+  def game_runner # loops until game finishes
     until @guess == "leave"
       text.take_a_guess
       if @guess != "leave"
@@ -27,7 +27,7 @@ attr_reader :code,
     true # for testing
   end
 
-  def user_response
+  def user_response # processes user's guesses and checks against expected responses
     @guess = gets.chomp.to_s.downcase
     if guess_options != nil
       @guess
@@ -41,7 +41,7 @@ attr_reader :code,
     end
   end
 
-  def guess_options
+  def guess_options # helper method for user response
     if (@guess == "c") || (@guess == "cheat")
       p code
     elsif (@guess == "q") || (@guess == "quit")
@@ -54,7 +54,7 @@ attr_reader :code,
     end
   end
 
-  def response_output
+  def response_output # gives information on the given guess
     if @guess == code
       correct_guess
     elsif @guesses.count == 1
@@ -64,7 +64,7 @@ attr_reader :code,
     end
   end
 
-  def correct_guess
+  def correct_guess # ends the game outputs game information
     end_timer
     if @guesses.count == 1
       print "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?
@@ -76,7 +76,7 @@ attr_reader :code,
     quit
   end
 
-  def position_checker #this will check the guess and see if it is correct!
+  def position_checker # checks the guess and returns the number of colors in the correct position
     split_mastercode = code.split("")
     split_guesscode = @guess.split("")
     shared = 0
@@ -88,7 +88,7 @@ attr_reader :code,
     shared
   end
 
-  def elements_in_common
+  def elements_in_common # checks the guess and returns the number of colors in common with the master code
     split_mastercode = code.split("")
     split_guesscode = @guess.split("")
     split_mastercode.find_all do |master|
@@ -100,11 +100,11 @@ attr_reader :code,
     @code.length - split_guesscode.length
   end
 
-  def quit
+  def quit # quits the game
     @guess = "leave"
   end
 
-  def end_timer
+  def end_timer # stops the timer and returns amount of time that passed
     endtime = Time.now
     elapsed_time = (endtime - @starttime).to_i
     minutes = (elapsed_time / 60).to_i
@@ -112,7 +112,7 @@ attr_reader :code,
     "#{minutes} minutes \nand #{seconds} seconds"
   end
 
-  def history
+  def history # prints guess history
     p "Guess History:"
     @guesses.each do |guess|
       p guess.upcase
