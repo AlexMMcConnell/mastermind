@@ -4,13 +4,15 @@ require 'time'
 class Game
 attr_reader :code,
             :guesses,
-            :guess
+            :guess,
+            :text
 
   def initialize(code)
     @code = code
     @guesses = []
     @guess = ""
     @starttime = Time.now
+    @text = MastermindText.new
   end
 
   def store_guesses
@@ -19,8 +21,7 @@ attr_reader :code,
 
   def game_runner
     until @guess == "leave"
-      p "What's your guess?"
-      print "> "
+      text.take_a_guess
       if @guess != "leave"
         user_response
       end
@@ -47,8 +48,7 @@ attr_reader :code,
     if (@guess == "c") || (@guess == "cheat")
       p code
     elsif (@guess == "q") || (@guess == "quit")
-      print "Game has been aborted. Are you sure you want to (q)uit?
-> "
+      text.game_abort
       @guess = "leave"
     elsif (@guess == "h") || (@guess == "history")
       history
@@ -61,26 +61,19 @@ attr_reader :code,
     if @guess == code
       correct_guess
     elsif @guesses.count == 1
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct
-elements with #{position_checker} in the correct positions. You've taken
-1 guess"
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've taken 1 guess"
     else
-      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct
-elements with #{position_checker} in the correct positions. You've taken
-#{@guesses.count} guesses."
+      puts "'#{@guess.upcase}' has #{elements_in_common} of the correct elements with #{position_checker} in the correct positions. You've taken #{@guesses.count} guesses."
     end
   end
 
   def correct_guess
     end_timer
     if @guesses.count == 1
-      print "Congratulations! You guessed the sequence '#{@guess.upcase}'
-in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?
+      print "Congratulations! You guessed the sequence '#{@guess.upcase}' in 1 guess over #{end_timer}. Do you want to (p)lay again or (q)uit?
 > "
     else
-      print "Congratulations! You guessed the sequence '#{@guess.upcase}'
-in #{guesses.count} guesses over #{end_timer}. Do you want to (p)lay again
-or (q)uit?
+      print "Congratulations! You guessed the sequence '#{@guess.upcase}' in #{guesses.count} guesses over #{end_timer}. Do you want to (p)lay again or (q)uit?
 > "
     end
     quit
